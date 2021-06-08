@@ -27,7 +27,7 @@ class PortfoliosController < ApplicationController
     @portfolio_item = Portfolio.find(params[:id])
     respond_to do |format|
       if @portfolio_item.update(portfolio_item_params)
-        format.html { redirect_to portfolios_path, notice: 'Portfolio item was successfully updated.' }
+        format.html { redirect_to portfolios_path, notice: 'Portfolio Item was successfully updated.' }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -36,6 +36,14 @@ class PortfoliosController < ApplicationController
 
   def show
     @portfolio_item = Portfolio.find(params[:id])
+  end
+
+  def destroy
+    @portfolio_item = Portfolio.find(params[:id])
+    @portfolio_item.destroy
+    respond_to do |format|
+      format.html { redirect_to portfolios_path, notice: 'Portfolio Item was successfully destroyed.' }
+    end
   end
 
   private
